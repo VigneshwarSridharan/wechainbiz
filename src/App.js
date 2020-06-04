@@ -1,26 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Suspense } from 'react';
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import appRouter from './router';
+import NavigationBar from './layout/NavigationBar';
+import './assets/scss/app.scss';
+import Footer from './layout/Footer';
+import Preloader from './utils/Preloader';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <React.Fragment>
+            <NavigationBar />
+            <BrowserRouter>
+                <Suspense fallback={<Preloader />} >
+                    <Switch>
+                        {
+                            appRouter.map((routeProps, inx) => {
+                                return (
+                                    <Route {...routeProps} key={inx} />
+                                )
+                            })
+                        }
+                    </Switch>
+                </Suspense>
+            </BrowserRouter>
+            <Footer />
+        </React.Fragment>
+    );
 }
 
 export default App;

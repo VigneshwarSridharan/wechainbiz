@@ -1,0 +1,9 @@
+body {
+    background-color: #fafafa;
+}
+.app-title {
+    color: $black;
+    span{
+        color: $app-primary;
+    }
+}
