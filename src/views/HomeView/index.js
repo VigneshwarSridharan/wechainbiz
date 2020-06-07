@@ -16,7 +16,7 @@ import BorrowerSignup from './BorrowerSignup';
 
 const HomeView = ({ match, history }) => {
 
-    const [openSingIn] = useState(match.path.includes('/login'))
+    const [openSingIn] = useState(match.path.includes('/borrower-login'))
     const [openBrokerSignup] = useState(match.path.includes('/broker-signup'))
     const [openBorrowerSignup] = useState(match.path.includes('/borrower-signup'))
 
