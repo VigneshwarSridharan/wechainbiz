@@ -3,9 +3,11 @@ import { lazy } from 'react';
 const HomeView = lazy(() => import(/* webpackChunkName: "home-view" */'../views/HomeView'));
 const OurProducts = lazy(() => import(/* webpackChunkName: "our-products" */'../views/OurProducts'));
 const AboutUs = lazy(() => import(/* webpackChunkName: "about-us" */'../views/AboutUs'));
+const Enquiries = lazy(() => import(/* webpackChunkName: "enquiries" */'../views/Enquiries'));
 
 const NewLoanApplication = lazy(() => import(/* webpackChunkName: "new-loan-application" */'../views/NewLoanApplication'));
 const DirectorsInformation = lazy(() => import(/* webpackChunkName: "directors-information" */'../views/DirectorsInformation'));
+const CompleteRegistration = lazy(() => import(/* webpackChunkName: "complete-registration" */'../views/CompleteRegistration'));
 
 const appRouter = [
     {
@@ -22,6 +24,12 @@ const appRouter = [
         icon: '',
     },
     {
+        path: '/enquiries',
+        component: Enquiries,
+        name: 'Home',
+        icon: '',
+    },
+    {
         path: '/new-loan',
         component: NewLoanApplication,
         name: 'Home',
@@ -30,6 +38,12 @@ const appRouter = [
     {
         path: '/directors-information',
         component: DirectorsInformation,
+        name: 'Home',
+        icon: '',
+    },
+    {
+        path: '/complete-registration',
+        component: CompleteRegistration,
         name: 'Home',
         icon: '',
     },

@@ -1,10 +1,13 @@
 import React from 'react'
+import PageHeader from '../../layout/PageHeader'
+import AboutUsSection from './AboutUs'
 
 const AboutUs = () => {
     return (
-        <section>
-            <h1>dsfsdf</h1>
-        </section>
+        <React.Fragment>
+            <PageHeader />
+            <AboutUsSection />
+        </React.Fragment>
     )
 }
 

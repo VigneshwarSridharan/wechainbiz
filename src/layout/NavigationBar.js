@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Navbar, NavbarBrand, NavbarToggler, Collapse, Nav, NavItem } from 'reactstrap';
-import { NavLink } from 'react-router-dom'
+import { Navbar, NavbarToggler, Collapse, Nav, NavItem } from 'reactstrap';
+import { NavLink, Link } from 'react-router-dom'
 
 const NavigationBar = () => {
 
@@ -23,14 +23,14 @@ const NavigationBar = () => {
 
     return (
         <Navbar color="white" light expand="md" className={`app-navigation ${isSticky ? 'active' : ''}`}>
-            <NavbarBrand href="/">
+            <Link className="navbar-brand" to="/">
                 <img src="./assets/images/logo.png" alt="" />
-            </NavbarBrand>
+            </Link>
             <NavbarToggler onClick={toggle} />
             <Collapse isOpen={isOpen} navbar>
                 <Nav className="mr-auto" navbar>
                     <NavItem>
-                        <NavLink className="nav-link"  to="/home">Home</NavLink>
+                        <NavLink className="nav-link" to="/home">Home</NavLink>
                     </NavItem>
                     <NavItem>
                         <NavLink className="nav-link" to="/enquiries">Enquiries </NavLink>
@@ -39,7 +39,7 @@ const NavigationBar = () => {
                         <NavLink className="nav-link" to="/our-products">Our Products </NavLink>
                     </NavItem>
                     <NavItem>
-                        <NavLink className="nav-link" to="/loan-application">Loan Application </NavLink>
+                        <NavLink className="nav-link" to="/new-loan">Loan Application </NavLink>
                     </NavItem>
                     <NavItem>
                         <NavLink className="nav-link" to="/lenders">Lenders </NavLink>

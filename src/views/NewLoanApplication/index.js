@@ -71,7 +71,7 @@ const NewLoanApplication = () => {
     return (
         <React.Fragment>
             <PageHeader />
-            <section className="py-5">
+            <section className="py-5 animate-fadeInUp">
                 <Container fluid>
                     <h4 className="app-title mb-4"><span>New Loan</span> Application</h4>
                     <Row>
