@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 import appRouter from './router';
 import NavigationBar from './layout/NavigationBar';
 import './assets/scss/app.scss';
@@ -9,8 +9,8 @@ import Preloader from './utils/Preloader';
 function App() {
     return (
         <React.Fragment>
-            <NavigationBar />
             <BrowserRouter>
+                <NavigationBar />
                 <Suspense fallback={<Preloader />} >
                     <Switch>
                         {
@@ -20,6 +20,7 @@ function App() {
                                 )
                             })
                         }
+                        <Redirect from="/" to='/home' />
                     </Switch>
                 </Suspense>
             </BrowserRouter>

@@ -1,15 +1,62 @@
 import { lazy } from 'react';
 
 const HomeView = lazy(() => import(/* webpackChunkName: "home-view" */'../views/HomeView'));
+const OurProducts = lazy(() => import(/* webpackChunkName: "our-products" */'../views/OurProducts'));
+const AboutUs = lazy(() => import(/* webpackChunkName: "about-us" */'../views/AboutUs'));
+
+const NewLoanApplication = lazy(() => import(/* webpackChunkName: "new-loan-application" */'../views/NewLoanApplication'));
+const DirectorsInformation = lazy(() => import(/* webpackChunkName: "directors-information" */'../views/DirectorsInformation'));
 
 const appRouter = [
     {
-        path: '/',
+        path: '/home',
         component: HomeView,
         name: 'Home',
         icon: '',
         exact: true
-    }
+    },
+    {
+        path: '/our-products',
+        component: OurProducts,
+        name: 'Home',
+        icon: '',
+    },
+    {
+        path: '/new-loan',
+        component: NewLoanApplication,
+        name: 'Home',
+        icon: '',
+    },
+    {
+        path: '/directors-information',
+        component: DirectorsInformation,
+        name: 'Home',
+        icon: '',
+    },
+    {
+        path: '/borrower-login',
+        component: HomeView,
+        name: 'Home',
+        icon: '',
+    },
+    {
+        path: '/broker-signup',
+        component: HomeView,
+        name: 'Home',
+        icon: '',
+    },
+    {
+        path: '/borrower-signup',
+        component: HomeView,
+        name: 'Home',
+        icon: '',
+    },
+    {
+        path: '/about-us',
+        component: AboutUs,
+        name: 'Home',
+        icon: '',
+    },
 ]
 
 export default appRouter;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './home-view.scss';
 import Header from './Header';
 import AboutUs from './AboutUs';
@@ -10,8 +10,16 @@ import RegisterNow from './RegisterNow';
 import FundingPartners from './FundingPartners';
 import OurTeam from './OurTeam';
 import BorrowerReviews from './BorrowerReviews';
+import BorrowerLogin from './BorrowerLogin';
+import BrokerSignup from './BrokerSignup';
+import BorrowerSignup from './BorrowerSignup';
 
-const HomeView = () => {
+const HomeView = ({ match, history }) => {
+
+    const [openSingIn] = useState(match.path.includes('/login'))
+    const [openBrokerSignup] = useState(match.path.includes('/broker-signup'))
+    const [openBorrowerSignup] = useState(match.path.includes('/borrower-signup'))
+
     return (
         <React.Fragment>
             <Header />
@@ -33,6 +41,9 @@ const HomeView = () => {
             <FundingPartners />
             <OurTeam />
             <BorrowerReviews />
+            <BorrowerLogin isOpen={openSingIn} toggle={() => history.push('/')} />
+            <BrokerSignup isOpen={openBrokerSignup} toggle={() => history.push('/')} />
+            <BorrowerSignup isOpen={openBorrowerSignup} toggle={() => history.push('/')} />
         </React.Fragment>
     )
 }

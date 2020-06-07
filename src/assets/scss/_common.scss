@@ -7,3 +7,70 @@ body {
         color: $app-primary;
     }
 }
+
+.app-list {
+    list-style: none;
+    li {
+        position: relative;
+        margin-bottom: 1rem;
+        &:before {
+            content: "\f111";
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            font-size: small;
+            color: $app-secondary;
+            position: absolute;
+            left: -1.5rem;
+        }
+    }
+}
+
+.app-table {
+    border-radius: 5px;
+    background-color: #ffffff;
+    overflow: hidden;
+    thead {
+        tr {
+            th {
+                background-color: $app-table-header-bg;
+                font-weight: normal;
+                // font-size: small;
+                color: #ffffff;
+                padding: 1rem 0.75rem;
+            }
+        }
+    }
+    tbody {
+        tr {
+            &:nth-child(odd) {
+                background-color: #ededed;
+            }
+            td {
+                border: none;
+                padding: 1rem 0.75rem;
+            }
+        }
+    }
+    tfoot {
+
+    }
+    .no-data {
+        min-height: 400px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+.anchor {
+    cursor: pointer;
+    user-select: none;
+    color: $app-primary;
+    display: inline-block;
+}
+
+.page-header {
+    background-position: center;
+    background-size: cover;
+    min-height: 300px;
+}

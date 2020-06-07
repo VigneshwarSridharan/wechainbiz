@@ -10,6 +10,8 @@
   flex-wrap: wrap; // For form validation feedback
   align-items: stretch;
   width: 100%;
+  border: $input-border-width solid $input-border-color;
+  border-radius: $input-border-radius;
 
   > .form-control,
   > .form-control-plaintext,
@@ -38,6 +40,10 @@
   // Bring the custom file input above the label
   > .custom-file .custom-file-input:focus {
     z-index: 4;
+  }
+
+  > .form-control {
+    border-width: 0;
   }
 
   > .form-control,
@@ -110,7 +116,7 @@
   text-align: center;
   white-space: nowrap;
   background-color: $input-group-addon-bg;
-  border: $input-border-width solid $input-group-addon-border-color;
+  // border: $input-border-width solid $input-group-addon-border-color;
   @include border-radius($input-border-radius);
 
   // Nuke default margins from checkboxes and radios to vertically center within.
@@ -179,7 +185,7 @@
 .input-group > .input-group-append:not(:last-child) > .input-group-text,
 .input-group > .input-group-append:last-child > .btn:not(:last-child):not(.dropdown-toggle),
 .input-group > .input-group-append:last-child > .input-group-text:not(:last-child) {
-  @include border-right-radius(0);
+  // @include border-right-radius(0);
 }
 
 .input-group > .input-group-append > .btn,
@@ -188,5 +194,5 @@
 .input-group > .input-group-prepend:not(:first-child) > .input-group-text,
 .input-group > .input-group-prepend:first-child > .btn:not(:first-child),
 .input-group > .input-group-prepend:first-child > .input-group-text:not(:first-child) {
-  @include border-left-radius(0);
+  // @include border-left-radius(0);
 }

@@ -68,11 +68,11 @@ $colors: map-merge(
 
 $primary:       $app-primary !default;
 $secondary:     $app-secondary !default;
-$success:       $green !default;
+$success:       $app-success !default;
 $info:          $cyan !default;
 $warning:       $yellow !default;
 $danger:        $red !default;
-$light:         $gray-100 !default;
+$light:         $gray-400 !default;
 $dark:          $gray-800 !default;
 
 $theme-colors: () !default;
@@ -397,7 +397,7 @@ $input-btn-line-height:       $line-height-base !default;
 
 $input-btn-focus-width:       .2rem !default;
 $input-btn-focus-color:       rgba($component-active-bg, .25) !default;
-$input-btn-focus-box-shadow:  0 0 0 $input-btn-focus-width $input-btn-focus-color !default;
+$input-btn-focus-box-shadow:  none  !default; //0 0 0 $input-btn-focus-width $input-btn-focus-color
 
 $input-btn-padding-y-sm:      .25rem !default;
 $input-btn-padding-x-sm:      .5rem !default;
@@ -544,20 +544,20 @@ $custom-control-indicator-disabled-bg:          $input-disabled-bg !default;
 $custom-control-label-disabled-color:           $gray-600 !default;
 
 $custom-control-indicator-checked-color:        $component-active-color !default;
-$custom-control-indicator-checked-bg:           $component-active-bg !default;
+$custom-control-indicator-checked-bg:           $app-success !default; //component-active-bg
 $custom-control-indicator-checked-disabled-bg:  rgba(theme-color("primary"), .5) !default;
 $custom-control-indicator-checked-box-shadow:   none !default;
 $custom-control-indicator-checked-border-color: $custom-control-indicator-checked-bg !default;
 
-$custom-control-indicator-focus-box-shadow:     $input-focus-box-shadow !default;
-$custom-control-indicator-focus-border-color:   $input-focus-border-color !default;
+$custom-control-indicator-focus-box-shadow:     none !default;
+$custom-control-indicator-focus-border-color:   none !default;
 
 $custom-control-indicator-active-color:         $component-active-color !default;
-$custom-control-indicator-active-bg:            lighten($component-active-bg, 35%) !default;
+$custom-control-indicator-active-bg:            lighten($app-success, 35%) !default;
 $custom-control-indicator-active-box-shadow:    none !default;
 $custom-control-indicator-active-border-color:  $custom-control-indicator-active-bg !default;
 
-$custom-checkbox-indicator-border-radius:       $border-radius !default;
+$custom-checkbox-indicator-border-radius:       3px !default;
 $custom-checkbox-indicator-icon-checked:        url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'><path fill='#{$custom-control-indicator-checked-color}' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26l2.974 2.99L8 2.193z'/></svg>") !default;
 
 $custom-checkbox-indicator-indeterminate-bg:           $component-active-bg !default;
@@ -834,7 +834,7 @@ $jumbotron-bg:                      $gray-200 !default;
 $card-spacer-y:                     .75rem !default;
 $card-spacer-x:                     1.25rem !default;
 $card-border-width:                 $border-width !default;
-$card-border-radius:                $border-radius !default;
+$card-border-radius:                5px !default;
 $card-border-color:                 rgba($black, .125) !default;
 $card-inner-border-radius:          subtract($card-border-radius, $card-border-width) !default;
 $card-cap-bg:                       rgba($black, .03) !default;
@@ -956,14 +956,14 @@ $modal-title-line-height:           $line-height-base !default;
 $modal-content-color:               null !default;
 $modal-content-bg:                  $white !default;
 $modal-content-border-color:        rgba($black, .2) !default;
-$modal-content-border-width:        $border-width !default;
+$modal-content-border-width:        0 !default;
 $modal-content-border-radius:       $border-radius-lg !default;
 $modal-content-inner-border-radius: subtract($modal-content-border-radius, $modal-content-border-width) !default;
 $modal-content-box-shadow-xs:       0 .25rem .5rem rgba($black, .5) !default;
 $modal-content-box-shadow-sm-up:    0 .5rem 1rem rgba($black, .5) !default;
 
 $modal-backdrop-bg:                 $black !default;
-$modal-backdrop-opacity:            .5 !default;
+$modal-backdrop-opacity:            .75 !default;
 $modal-header-border-color:         $border-color !default;
 $modal-footer-border-color:         $modal-header-border-color !default;
 $modal-header-border-width:         $modal-content-border-width !default;
@@ -977,7 +977,7 @@ $modal-lg:                          800px !default;
 $modal-md:                          500px !default;
 $modal-sm:                          300px !default;
 
-$modal-fade-transform:              translate(0, -50px) !default;
+$modal-fade-transform:              scale(0.7) !default;
 $modal-show-transform:              none !default;
 $modal-transition:                  transform .3s ease-out !default;
 $modal-scale-transform:             scale(1.02) !default;

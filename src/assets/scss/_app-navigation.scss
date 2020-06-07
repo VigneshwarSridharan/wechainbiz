@@ -14,10 +14,7 @@
         .nav-item {
             .nav-link {
                 color: #000000;
-
-            }
-            &.active {
-                .nav-link {
+                &.active {
                     color: $app-primary;
                 }
             }

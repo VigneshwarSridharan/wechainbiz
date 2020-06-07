@@ -69,6 +69,8 @@ input[type="month"] {
 }
 
 select.form-control {
+  background: #fff url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%224pt%22%20height%3D%226pt%22%20viewBox%3D%220%200%204%206%22%20version%3D%221.1%22%3E%3Cpath%20%20fill%3D%22%23ced4da%22%20d%3D%22M%200.390625%202.25%20L%203.609375%202.25%20C%203.828125%202.25%203.941406%202.5%203.785156%202.648438%20L%202.175781%204.15625%20C%202.078125%204.25%201.921875%204.25%201.824219%204.15625%20L%200.214844%202.648438%20C%200.0585938%202.5%200.167969%202.25%200.390625%202.25%20Z%20M%200.390625%202.25%20%22%2F%3E%3C%2Fsvg%3E") no-repeat right 0.75rem center/12px 16px;
+  appearance: none;
   &:focus::-ms-value {
     // Suppress the nested default white text on blue background highlight given to
     // the selected option text when the (still closed) <select> receives focus
@@ -175,6 +177,7 @@ select.form-control {
 
 textarea.form-control {
   height: auto;
+  border-radius: 5px;
 }
 
 // Form groups
