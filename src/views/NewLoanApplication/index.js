@@ -1,13 +1,20 @@
-import React, { useState, useMemo } from 'react'
+import React, { useState, useMemo, useEffect } from 'react'
 import PageHeader from '../../layout/PageHeader'
 import { Container, Row, Col, Button, Table } from 'reactstrap'
 import SidebarNavigation from '../../layout/SidebarNavigation'
 import NewLoanModal from './NewLoanModal'
 import { useTable } from 'react-table'
 import moment from 'moment'
+import LoanApplicationService from '../../APIService/LoanApplicationService'
 
 const NewLoanApplication = () => {
     const [isOpen, setIsOpen] = useState(false)
+
+    useEffect(() => {
+        LoanApplicationService.getList().then(res => {
+            console.log(res)
+        })
+    }, [])
 
     const columns = useMemo(() => ([
         {
