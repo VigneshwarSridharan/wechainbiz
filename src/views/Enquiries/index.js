@@ -1,8 +1,12 @@
 import React from 'react';
 import PageHeader from '../../layout/PageHeader';
-import { Container, Button, Row, Col, FormGroup, Label, Input, InputGroup, InputGroupAddon, InputGroupText, Form, FormFeedback } from 'reactstrap';
+import { Container, Button, Row, Col, FormGroup, Input, InputGroup, InputGroupAddon, InputGroupText, Form, FormFeedback } from 'reactstrap';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
+import useFocusError from '../../utils/useFocusError';
+import FormField from '../../components/FormField';
+import { EnquiryService } from '../../APIService';
+import Swal from 'sweetalert2'
 
 const Enquiries = () => {
 
@@ -14,13 +18,13 @@ const Enquiries = () => {
         ifsc_code: yup.string().required('Ifsc Code is a required field'),
         no_of_employess: yup.string().required('No Of Employess is a required field'),
         annual_tunover: yup.string().required('Annual Tunover is a required field'),
-        email: yup.string().required('Email is a required field'),
+        email: yup.string().required('Email is a required field').email('Enter valid email'),
         mobile_no: yup.string().required('Mobile No is a required field'),
         enquiry_title: yup.string().required('Enquiry Title is a required field'),
         discription: yup.string().required('Discription is a required field')
     })
 
-    const { errors, touched, getFieldProps, handleSubmit } = useFormik({
+    const { errors, touched, getFieldProps, handleSubmit, isSubmitting, handleReset, isValidating } = useFormik({
         initialValues: {
             first_name: '',
             last_name: '',
@@ -34,11 +38,33 @@ const Enquiries = () => {
             enquiry_title: '',
             discription: ''
         },
-        onSubmit: values => {
-            console.log(values)
+        onSubmit: (values, { resetForm }) => {
+            EnquiryService.createEnquiry(values).then(res => {
+                console.log({ res })
+                Swal.fire(
+                    "Done!",
+                    res.message,
+                    "success"
+                )
+                resetForm();
+            }).catch(err => {
+                console.log(err)
+            })
         },
-        validationSchema
+        validationSchema,
     })
+
+    useFocusError(errors, isSubmitting, isValidating)
+
+    const fieldProps = name => {
+        const isError = errors[name];
+        const isTouched = touched[name];
+        return {
+            ...getFieldProps(name),
+            isError,
+            isTouched
+        }
+    }
 
     return (
         <React.Fragment>
@@ -49,72 +75,44 @@ const Enquiries = () => {
                         <Button className="mr-2"><i className="fas fa-long-arrow-alt-left mr-2" ></i>Back</Button>
                         <h4 className="app-title m-0">Enquiries</h4>
                     </div>
-                    <Form className="px-5 py-3 shadow rounded bg-white" onSubmit={handleSubmit}>
+                    <Form className="px-5 py-3 shadow rounded bg-white" onSubmit={handleSubmit} onReset={handleReset}>
                         <div className="p-2 bg-light mb-3 mx-n3">
                             <h6 className="m-0">General Information</h6>
                         </div>
                         <Row>
                             <Col sm={4}>
-                                <FormGroup>
-                                    <Label>Directors First Name </Label>
-                                    <Input {...getFieldProps('first_name')} invalid={Boolean(errors.first_name && touched.first_name)} />
-                                    {errors.first_name && touched.first_name && <FormFeedback valid={false} >{errors.first_name}</FormFeedback>}
-                                </FormGroup>
+                                <FormField label="Directors First Name" {...fieldProps('first_name')} />
                             </Col>
                             <Col sm={4}>
-                                <FormGroup>
-                                    <Label>Directors Last Name </Label>
-                                    <Input {...getFieldProps('last_name')} invalid={Boolean(errors.last_name && touched.last_name)} />
-                                    {errors.last_name && touched.last_name && <FormFeedback valid={false} >{errors.last_name}</FormFeedback>}
-                                </FormGroup>
+                                <FormField label="Directors Last Name" {...fieldProps('last_name')} />
                             </Col>
                             <Col sm={4}>
-                                <FormGroup>
-                                    <Label>Company Name </Label>
-                                    <Input {...getFieldProps('company_name')} invalid={Boolean(errors.company_name && touched.company_name)} />
-                                    {errors.company_name && touched.company_name && <FormFeedback valid={false} >{errors.company_name}</FormFeedback>}
-                                </FormGroup>
+                                <FormField label="Company Name" {...fieldProps('company_name')} />
                             </Col>
                         </Row>
                         <Row>
                             <Col sm={4}>
-                                <FormGroup>
-                                    <Label>UEN Number</Label>
-                                    <Input {...getFieldProps('uen_number')} invalid={Boolean(errors.uen_number && touched.uen_number)} />
-                                    {errors.uen_number && touched.uen_number && <FormFeedback valid={false} >{errors.uen_number}</FormFeedback>}
-                                </FormGroup>
+                                <FormField label="UEN Number" {...fieldProps('uen_number')} />
                             </Col>
                             <Col sm={4}>
-                                <FormGroup>
-                                    <Label>Industry-ISIC code </Label>
-                                    <Input type="select" {...getFieldProps('ifsc_code')} invalid={Boolean(errors.ifsc_code && touched.ifsc_code)} >
-                                        <option>Select</option>
-                                        <option value="value1">value1</option>
-                                    </Input>
-                                    {errors.ifsc_code && touched.ifsc_code && <FormFeedback valid={false} >{errors.ifsc_code}</FormFeedback>}
-                                </FormGroup>
+                                <FormField label="Industry-ISIC code" type="select" {...fieldProps('ifsc_code')}>
+                                    <option>Select</option>
+                                    <option value="321565">321565</option>
+                                </FormField>
                             </Col>
                             <Col sm={4}>
-                                <FormGroup>
-                                    <Label>Number of Employees </Label>
-                                    <Input type="select" {...getFieldProps('no_of_employess')} invalid={Boolean(errors.no_of_employess && touched.no_of_employess)} >
-                                        <option>Select</option>
-                                        <option value="value1">value1</option>
-                                    </Input>
-                                    {errors.no_of_employess && touched.no_of_employess && <FormFeedback valid={false} >{errors.no_of_employess}</FormFeedback>}
-                                </FormGroup>
+                                <FormField label="Number of Employees" type="select" {...fieldProps('no_of_employess')} >
+                                    <option>Select</option>
+                                    <option value="400">400</option>
+                                </FormField>
                             </Col>
                         </Row>
                         <Row>
                             <Col sm={4}>
-                                <FormGroup>
-                                    <Label>Annual Turnover </Label>
-                                    <Input type="select" {...getFieldProps('annual_tunover')} invalid={Boolean(errors.annual_tunover && touched.annual_tunover)} >
-                                        <option>Select</option>
-                                        <option value="value1">value1</option>
-                                    </Input>
-                                    {errors.annual_tunover && touched.annual_tunover && <FormFeedback valid={false} >{errors.annual_tunover}</FormFeedback>}
-                                </FormGroup>
+                                <FormField label="Annual Turnover" type="select" {...fieldProps('annual_tunover')} >
+                                    <option>Select</option>
+                                    <option value="25,00,000">25,00,000</option>
+                                </FormField>
                             </Col>
                         </Row>
                         <div className="p-2 bg-light mb-3 mx-n3">
@@ -122,11 +120,7 @@ const Enquiries = () => {
                         </div>
                         <Row className="align-items-end">
                             <Col sm={4}>
-                                <FormGroup>
-                                    <Label>Email </Label>
-                                    <Input type="email" placeholder="Enter Email Address" {...getFieldProps('email')} invalid={Boolean(errors.email && touched.email)} />
-                                    {errors.email && touched.email && <FormFeedback valid={false} >{errors.email}</FormFeedback>}
-                                </FormGroup>
+                                <FormField label="Email" type="email" placeholder="Enter Email Address"  {...fieldProps('email')} />
                             </Col>
                             <Col sm={4}>
                                 <FormGroup>
@@ -134,7 +128,7 @@ const Enquiries = () => {
                                         <InputGroupAddon addonType="prepend">
                                             <InputGroupText>+91</InputGroupText>
                                         </InputGroupAddon>
-                                        <Input placeholder="Phone Number" {...getFieldProps('mobile_no')} invalid={Boolean(errors.mobile_no && touched.mobile_no)}/>
+                                        <Input placeholder="Phone Number" {...getFieldProps('mobile_no')} invalid={Boolean(errors.mobile_no && touched.mobile_no)} />
                                     </InputGroup>
                                     {errors.mobile_no && touched.mobile_no && <FormFeedback valid={false} >{errors.mobile_no}</FormFeedback>}
                                 </FormGroup>
@@ -145,26 +139,17 @@ const Enquiries = () => {
                         </div>
                         <Row>
                             <Col sm={4}>
-                                <FormGroup>
-                                    <Label>Enquiry Title </Label>
-                                    <Input placeholder="Enter Title" {...getFieldProps('enquiry_title')} invalid={Boolean(errors.enquiry_title && touched.enquiry_title)} />
-                                    {errors.enquiry_title && touched.enquiry_title && <FormFeedback valid={false} >{errors.enquiry_title}</FormFeedback>}
-
-                                </FormGroup>
+                                <FormField label="Enquiry Title" placeholder="Enter Title" {...fieldProps('enquiry_title')} />
                             </Col>
                         </Row>
                         <Row>
                             <Col sm={8}>
-                                <FormGroup>
-                                    <Label>Description </Label>
-                                    <Input type="textarea" rows={6} placeholder="Enter Description " {...getFieldProps('discription')} invalid={Boolean(errors.discription && touched.discription)} />
-                                    {errors.discription && touched.discription && <FormFeedback valid={false} >{errors.discription}</FormFeedback>}
-                                </FormGroup>
+                                <FormField label="Description" type="textarea" rows={6} placeholder="Enter Description " {...fieldProps('discription')} />
                             </Col>
                         </Row>
                         <div className="text-right">
-                            <Button color="danger" className="mr-3">Cancel <i className="fas fa-times-circle ml-2"></i></Button>
-                            <Button color="success" type="submit">Submit <i className="fas fa-arrow-right ml-2"></i></Button>
+                            <Button color="danger" className="mr-3" type="reset">Cancel <i className="fas fa-times-circle ml-2"></i></Button>
+                            <Button color="success" type="submit" disabled={isSubmitting}>Submit <i className="fas fa-arrow-right ml-2"></i></Button>
                         </div>
                     </Form>
                 </Container>
