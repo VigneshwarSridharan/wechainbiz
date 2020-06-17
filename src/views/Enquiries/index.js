@@ -39,7 +39,7 @@ const Enquiries = () => {
             discription: ''
         },
         onSubmit: (values, { resetForm }) => {
-            EnquiryService.createEnquiry(values).then(res => {
+            EnquiryService.create(values).then(res => {
                 console.log({ res })
                 Swal.fire(
                     "Done!",

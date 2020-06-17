@@ -5,13 +5,13 @@ import SidebarNavigation from '../../layout/SidebarNavigation'
 import NewLoanModal from './NewLoanModal'
 import { useTable } from 'react-table'
 import moment from 'moment'
-import LoanApplicationService from '../../APIService/LoanApplicationService'
+import { LoanApplicationService } from "../../APIService";
 
 const NewLoanApplication = () => {
     const [isOpen, setIsOpen] = useState(false)
 
     useEffect(() => {
-        LoanApplicationService.getList().then(res => {
+        LoanApplicationService.list().then(res => {
             console.log(res)
         })
     }, [])

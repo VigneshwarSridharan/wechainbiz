@@ -7,6 +7,7 @@ import useFocusError from '../../utils/useFocusError';
 import FormField from '../../components/FormField';
 import { ProfileService } from '../../APIService';
 import Swal from 'sweetalert2';
+import { numberOfEmployees, annualTurnover } from '../../constants/DefaultOptions';
 
 const CompleteRegistration = () => {
 
@@ -45,7 +46,7 @@ const CompleteRegistration = () => {
             website: '',
         },
         onSubmit: (values, { resetForm }) => {
-            ProfileService.createRegistration(values).then(res => {
+            ProfileService.create(values).then(res => {
                 console.log(res);
                 Swal.fire(
                     "Done!",
@@ -104,7 +105,13 @@ const CompleteRegistration = () => {
                             <Col sm={4}>
                                 <FormField label="Number of Employees" type="select" {...fieldProps('number_of_employees')} >
                                     <option>Select</option>
-                                    <option value="400">400</option>
+                                    {
+                                        numberOfEmployees.map((option, inx) => {
+                                            return (
+                                                <option value={option} key={inx}>{option}</option>
+                                            )
+                                        })
+                                    }
                                 </FormField>
                             </Col>
                         </Row>
@@ -112,7 +119,13 @@ const CompleteRegistration = () => {
                             <Col sm={4}>
                                 <FormField label="Annual Turnover" type="select" {...fieldProps('annual_tun_over')} >
                                     <option>Select</option>
-                                    <option value="35,80,000">35,80,000</option>
+                                    {
+                                        annualTurnover.map((option, inx) => {
+                                            return (
+                                                <option value={option} key={inx}>{option}</option>
+                                            )
+                                        })
+                                    }
                                 </FormField>
                             </Col>
                         </Row>
@@ -159,17 +172,18 @@ const CompleteRegistration = () => {
                         <div className="p-2 bg-light mb-3 mx-n3">
                             <h6 className="m-0">Contact Information </h6>
                         </div>
-                        <Row className="align-items-end">
+                        <Row >
                             <Col sm={4}>
                                 <FormField label="Email" type="email" {...fieldProps('email')} />
                             </Col>
                             <Col sm={4}>
                                 <FormGroup>
+                                    <Label>Phone Number</Label>
                                     <InputGroup className={Boolean(errors.mobile_number && touched.mobile_number) ? 'is-invalid border-danger' : ''}>
                                         <InputGroupAddon addonType="prepend">
                                             <InputGroupText>+91</InputGroupText>
                                         </InputGroupAddon>
-                                        <Input placeholder="Phone Number" {...getFieldProps('mobile_number')} invalid={Boolean(errors.mobile_number && touched.mobile_number)} />
+                                        <Input {...getFieldProps('mobile_number')} invalid={Boolean(errors.mobile_number && touched.mobile_number)} />
                                     </InputGroup>
                                     {errors.mobile_number && touched.mobile_number && <FormFeedback valid={false} >{errors.mobile_number}</FormFeedback>}
                                 </FormGroup>

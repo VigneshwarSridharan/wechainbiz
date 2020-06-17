@@ -14,9 +14,14 @@ function App() {
                 <Suspense fallback={<Preloader />} >
                     <Switch>
                         {
-                            appRouter.map((routeProps, inx) => {
+                            appRouter.map(({ component: Component, ...routeProps }, inx) => {
                                 return (
-                                    <Route {...routeProps} key={inx} />
+                                    <Route {...routeProps} render={renderProps => {
+                                        console.log(renderProps)
+                                        return (
+                                            <Component {...renderProps} />
+                                        )
+                                    }} key={inx} />
                                 )
                             })
                         }
