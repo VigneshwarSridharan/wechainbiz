@@ -6,6 +6,7 @@ const AboutUs = lazy(() => import(/* webpackChunkName: "about-us" */'../views/Ab
 const Enquiries = lazy(() => import(/* webpackChunkName: "enquiries" */'../views/Enquiries'));
 
 const NewLoanApplication = lazy(() => import(/* webpackChunkName: "new-loan-application" */'../views/NewLoanApplication'));
+const ApplyNewLoanApplication = lazy(() => import(/* webpackChunkName: "apply-new-loan-application" */'../views/ApplyNewLoanApplication'));
 const DirectorsInformation = lazy(() => import(/* webpackChunkName: "directors-information" */'../views/DirectorsInformation'));
 const CompleteRegistration = lazy(() => import(/* webpackChunkName: "complete-registration" */'../views/CompleteRegistration'));
 
@@ -30,11 +31,18 @@ const appRouter = [
         icon: '',
     },
     {
+        path: '/new-loan/:product',
+        component: ApplyNewLoanApplication,
+        name: 'Home',
+        icon: '',
+    },
+    {
         path: '/new-loan',
         component: NewLoanApplication,
         name: 'Home',
         icon: '',
     },
+    
     {
         path: '/directors-information',
         component: DirectorsInformation,

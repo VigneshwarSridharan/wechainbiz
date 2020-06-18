@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Modal, ModalBody, Row, Col, Form, Input, FormGroup, Button, CustomInput, FormFeedback } from 'reactstrap';
 import { useFormik } from 'formik';
 import * as yup from 'yup';

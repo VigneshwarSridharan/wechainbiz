@@ -5,14 +5,22 @@ import SidebarNavigation from '../../layout/SidebarNavigation'
 import NewLoanModal from './NewLoanModal'
 import { useTable } from 'react-table'
 import moment from 'moment'
-import { LoanApplicationService } from "../../APIService";
+import { LoanApplicationService, productsService } from "../../APIService";
 
 const NewLoanApplication = () => {
     const [isOpen, setIsOpen] = useState(false)
 
+    const [products, setProducts] = useState([])
+
     useEffect(() => {
         LoanApplicationService.list().then(res => {
             console.log(res)
+        })
+
+        productsService.list().then(res => {
+            if (res.success === 1) {
+                setProducts(res.data)
+            }
         })
     }, [])
 
@@ -139,7 +147,7 @@ const NewLoanApplication = () => {
                     </Row>
                 </Container>
             </section>
-            <NewLoanModal isOpen={isOpen} toggle={() => setIsOpen(!isOpen)} />
+            {isOpen && <NewLoanModal isOpen={isOpen} toggle={() => setIsOpen(!isOpen)} products={products} />}
         </React.Fragment>
     )
 }

@@ -43,10 +43,16 @@ const LoanApplicationService = {
     list: () => request.get('/loanApplication')
 }
 
+const productsService = {
+    list: () => request.get('/products'),
+    find: (id) => request.get('/products/' + id)
+}
+
 export {
     request,
     BorrowerService,
     EnquiryService,
     ProfileService,
-    LoanApplicationService
+    LoanApplicationService,
+    productsService
 }
